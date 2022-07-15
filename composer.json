@@ -1,0 +1,18 @@
+{
+    "name": "dell/test-oop",
+    "autoload": {
+        "psr-4": {
+            "Dell\\TestOop\\": "src/",
+            "Router\\": "routes/",
+            "App\\": "app/",
+            "Database\\": "database/"
+        }
+    },
+    "authors": [
+        {
+            "name": "jbelibasma",
+            "email": "jbelibasma22@gmail.com"
+        }
+    ],
+    "require": {}
+}
