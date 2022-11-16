@@ -31,29 +31,72 @@ abstract class Model{
     {
         return $this->query("DELETE FROM {$this->table} WHERE id= ?", [$id]);
     }
-    public function update(int $id, array $data)
-    {
-        $sqlRequest=" ";
+
+    public function create_P(array $data, array $relations){
+        $firstinfo=" ";
+        $secondinfo=" ";
         $i=1;
-        foreach($data as $key=>$value){
-            $comma = $i === count($data) ? " " :', ' ;
-            $sqlRequest .= "{$key}= :{$key}{$comma}";
+        foreach($data as $key=>$value)
+        {
+            $comma = $i === count($data) ? "" :', ';
+            $firstinfo .= "{$key}{$comma}";
+            $secondinfo .= ":{$key}{$comma}";
             $i++;
         }
         
+    }
+//    public function Idquestion($Idquestion){
+//     $Idquestion=$_GET['question_id'];
+    
+//    }
+    public function create(array $data){
+        $firstinfo=" ";
+        $secondinfo=" ";
+        $i=1;
+        foreach($data as $key=>$value)
+        {
+            $comma = $i === count($data) ? "" :', ';
+            $firstinfo .= "{$key}{$comma}";
+            $secondinfo .= ":{$key}{$comma}";
+            $i++;
+        }
+     
+        $this->query("INSERT INTO {$this->table} ($firstinfo) VALUES ($secondinfo)", $data);
+        // var_dump($data);die;
+        // return $this->query(" INSERT INTO {$this->table} (`id`, `title`, `content`, `Id_category`) VALUES (?,?,?,?)",$data);
+    }
+    public function update(int $id, array $data , ?array $relations=null)
+    {
+        $sqlRequest=" ";
+        $i=1;
+       
+            foreach($data as $key=>$value){
+                $comma = $i === count($data) ? "" :', ' ;
+                $sqlRequest .= "{$key}= :{$key}{$comma}";
+                $i++;
+            }
+       
         $data['id']=$id;
+        
         return $this->query("UPDATE {$this->table} SET {$sqlRequest} WHERE id= :id", $data);
+        
 
-        // $sql="UPDATE {$this->table} SET title= :title, content= :content WHERE id= :id";
-
+      
     }  
+   
+
     public function query(string $sql, array $param= null, bool $single= null){
         $method= is_null($param) ? 'query' : 'prepare';
-        if(strpos($sql, 'DELETE')===0 || strpos($sql, 'UPDATE')===0 || strpos($sql, "CREATE")===0){
-            $statm= $this->db->getPDO()->$method($sql);
-            $statm->setFetchMode(PDO::FETCH_CLASS, get_class($this), [$this->db]);
-            return $statm->execute($param);
-        }
+        if(
+            strpos($sql, 'DELETE')===0
+             || strpos($sql, 'INSERT')===0
+              || strpos($sql, 'UPDATE')===0
+            )
+            {
+                $statm= $this->db->getPDO()->$method($sql);
+                $statm->setFetchMode(PDO::FETCH_CLASS, get_class($this), [$this->db]);
+                return $statm->execute($param);
+            }
         $fetch= is_null($single) ? 'fetchAll' : 'fetch';
         $statm= $this->db->getPDO()->$method($sql);
         $statm->setFetchMode(PDO::FETCH_CLASS, get_class($this), [$this->db]);
@@ -65,5 +108,10 @@ abstract class Model{
             return $statm->$fetch();
         }
     }
+    
+
    
+
+    
+
 }   

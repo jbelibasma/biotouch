@@ -1,8 +1,8 @@
 {
-    "name": "dell/test-oop",
+    "name": "dell/biotouch",
     "autoload": {
         "psr-4": {
-            "Dell\\TestOop\\": "src/",
+            "Dell\\Biotouch\\": "src/",
             "Router\\": "routes/",
             "App\\": "app/",
             "Database\\": "database/"

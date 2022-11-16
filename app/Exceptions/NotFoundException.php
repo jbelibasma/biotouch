@@ -12,4 +12,7 @@ class NotFoundException extends Exception{
     public function error404(){
         require VIEWS . 'errors/error.php';
     }
+    public function error500(){
+        require VIEWS . 'errors/error.php';
+    }
 }

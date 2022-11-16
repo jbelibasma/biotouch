@@ -9,9 +9,9 @@ class Route{
     public $matches;
     public function __construct($path, $action)
     {
-    // stocker path qui j'ai' envoyé
-        $this->path=trim($path,'/');
-    // stocker action qui j'ai' envoyé
+        // stocker path qui j'ai' envoyé
+            $this->path=trim($path,'/');
+        // stocker action qui j'ai' envoyé
         $this->action=$action;
     }
     public function matches(string $url){
@@ -33,7 +33,7 @@ class Route{
     }
     public function execute(){
      $params=explode('@',$this->action);
-     $controller= new $params[0](new DBConnection('127.0.0.1','test-oop', 'root', ''));
+     $controller= new $params[0](new DBConnection('127.0.0.1','biotouch', 'root', ''));
      $method= $params[1];
      return isset($this->matches[1]) ? $controller->$method($this->matches[1]) : $controller->$method(); 
  
