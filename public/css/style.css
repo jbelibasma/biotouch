@@ -534,9 +534,17 @@ table .modifier a {
   padding: 1rem 4rem;
   cursor: pointer;
 }
-
+.login-register span a:hover,
+.login-register .forget #forget:hover,
+.login-register p a:hover {
+  color: #879e0f;
+}
 .error {
   color: red;
+  font-size: 1.5rem;
+}
+.error p span {
+  display: block;
 }
 /******* admin ******************/
 .message_admin {

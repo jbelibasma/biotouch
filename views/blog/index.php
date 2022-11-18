@@ -3,7 +3,7 @@
     <h1>la parfaite qualité de nos produits!</h1>
     <section>
         <article id="offre">
-            <video class="fullscreen-bg-video" controls loop muted autoplay poster="Rustypic.jpg" s>
+            <video class="fullscreen-bg-video" loop muted autoplay poster="Rustypic.jpg" s>
                 <source src="<?= SCRIPTS . 'img' . DIRECTORY_SEPARATOR  . 'video.mp4' ?>" type="video/mp4">
 
             </video>
